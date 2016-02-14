@@ -1,0 +1,6 @@
+c:\users\¤5456546561122112312\documents\visual studio 2015\Projects\tp4\tp4\bin\Debug\tp4.exe.config
+c:\users\¤5456546561122112312\documents\visual studio 2015\Projects\tp4\tp4\obj\Debug\tp4.csprojResolveAssemblyReference.cache
+c:\users\¤5456546561122112312\documents\visual studio 2015\Projects\tp4\tp4\bin\Debug\tp4.exe
+c:\users\¤5456546561122112312\documents\visual studio 2015\Projects\tp4\tp4\bin\Debug\tp4.pdb
+c:\users\¤5456546561122112312\documents\visual studio 2015\Projects\tp4\tp4\obj\Debug\tp4.exe
+c:\users\¤5456546561122112312\documents\visual studio 2015\Projects\tp4\tp4\obj\Debug\tp4.pdb
