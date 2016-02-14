@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using tp4;
 
@@ -11,42 +12,55 @@ namespace tp4
     {
         static void Main(string[] args)
         {
-            FileThreadUnsafe<String> f = new tp4.FileThreadUnsafe<String>(4);
-            f.Enfiler("Florian");
-            f.Afficher();
+            //-I
+            #region
+            //FileThreadUnsafe<String> f = new tp4.FileThreadUnsafe<String>(4);
+            //ajouter(f, new List<string>(new string[] { "Florian", "Vincent", "Alex", "Math" }));
+            //f.Afficher();
 
-            f.Enfiler("Germain");
-            f.Afficher();
+            //retirer(f, 2);
 
-            f.Enfiler("Alex");
-            f.Afficher();
+            //ajouter(f, new List<string>(new string[] { "Michel", "Ari" }));
+            //f.Afficher();
+            #endregion
 
-            f.Enfiler("Math");
-            f.Afficher();
+            //-II
+            #region
+            FileThreadUnsafe<String> f2 = new tp4.FileThreadUnsafe<String>(4);
 
-            f.Defiler();
-            f.Afficher();
+            Thread t1 = new Thread(() => ajouter(f2, new List<string>(new string[] { "Florian", "Vincent", "Alex", "Math" })));
+            Thread t2 = new Thread(() => retirer(f2, 2));
+            Thread t3 = new Thread(() => ajouter(f2, new List<string>(new string[] { "Michel", "Ari" })));
 
-            f.Defiler();
-            f.Afficher();
+            t1.Start();
+            t2.Start();
+            t3.Start();
 
-            f.Enfiler("Eric");
-            f.Afficher();
+            t1.Join();
+            t2.Join();
+            t3.Join();
 
-            f.Enfiler("Ari");
-            f.Afficher();
+            f2.Afficher();
 
-            f.Enfiler("dernier");
-            f.Afficher();
-            //int cpt = 0;
-            //while(cpt<100)
-            //{
-            //    f.Enfiler(cpt);
-            //    f.Afficher();
-            //    cpt++;
-            //    System.Threading.Thread.Sleep(1000);
-            //}
+            #endregion
+
+
+
         }
-        
+        public static void ajouter(FileThreadUnsafe<String> f,List<String> noms)
+        {
+            foreach(var nom in noms)
+            {
+                f.Enfiler(nom);
+            }
+        }
+        public static void retirer(FileThreadUnsafe<String> f, int cpt)
+        {
+            for(int i=0;i<2;i++)
+            {
+                f.Defiler();
+            }
+        }
+
     }
 }
