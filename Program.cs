@@ -26,11 +26,31 @@ namespace tp4
 
             //-II
             #region
-            FileThreadUnsafe<String> f2 = new tp4.FileThreadUnsafe<String>(4);
+            //FileThreadUnsafe<String> f2 = new tp4.FileThreadUnsafe<String>(4);
 
-            Thread t1 = new Thread(() => ajouter(f2, new List<string>(new string[] { "Florian", "Vincent", "Alex", "Math" })));
-            Thread t2 = new Thread(() => retirer(f2, 2));
-            Thread t3 = new Thread(() => ajouter(f2, new List<string>(new string[] { "Michel", "Ari" })));
+            //Thread t1 = new Thread(() => ajouter(f2, new List<string>(new string[] { "Florian", "Vincent", "Alex", "Math" })));
+            //Thread t2 = new Thread(() => retirer(f2, 2));
+            //Thread t3 = new Thread(() => ajouter(f2, new List<string>(new string[] { "Michel", "Ari" })));
+
+            //t1.Start();
+            //t2.Start();
+            //t3.Start();
+
+            //t1.Join();
+            //t2.Join();
+            //t3.Join();
+
+            //f2.Afficher();
+
+            #endregion
+
+            //III/IV
+            #region
+            FileThreadSafe<String> f3 = new tp4.FileThreadSafe<String>(4);
+
+            Thread t1 = new Thread(() => ajouter(f3, new List<string>(new string[] { "Florian", "Vincent", "Alex", "Math" })));
+            Thread t2 = new Thread(() => retirer(f3, 2));
+            Thread t3 = new Thread(() => ajouter(f3, new List<string>(new string[] { "Michel", "Ari" })));
 
             t1.Start();
             t2.Start();
@@ -40,11 +60,8 @@ namespace tp4
             t2.Join();
             t3.Join();
 
-            f2.Afficher();
-
+            f3.Afficher();
             #endregion
-
-
 
         }
         public static void ajouter(FileThreadUnsafe<String> f,List<String> noms)
@@ -61,6 +78,19 @@ namespace tp4
                 f.Defiler();
             }
         }
-
+        public static void ajouter(FileThreadSafe<String> f, List<String> noms)
+        {
+            foreach (var nom in noms)
+            {
+                f.Enfiler(nom);
+            }
+        }
+        public static void retirer(FileThreadSafe<String> f, int cpt)
+        {
+            for (int i = 0; i < 2; i++)
+            {
+                f.Defiler();
+            }
+        }
     }
 }
