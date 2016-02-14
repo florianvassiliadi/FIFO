@@ -31,12 +31,7 @@ namespace tp4
 
         public void Defiler()
         {
-            if (Vide())
-                throw new ExceptionFileVide();
-            else if (tete == queue)
-                tete = queue = -1;
-            else
-                tete = tete + 1;
+            tete = (tete + 1) % tab.Length;
         }
         public bool Vide()
         { 
@@ -66,11 +61,15 @@ namespace tp4
         public void Afficher()
         {
             Console.WriteLine();
-            int i = tete;
-            while(i<=queue)
+            int i = 0;
+            while(i<=tab.Length)
             {
-                int r = i;
-                Console.Write(" "+tab[i]);
+                try
+                {
+
+                    Console.Write(" " + tab[i]);
+                }
+                catch(Exception e) { }
                 i++;
             }
         }

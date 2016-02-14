@@ -29,6 +29,15 @@ namespace tp4
 
             f.Defiler();
             f.Afficher();
+
+            f.Enfiler("Eric");
+            f.Afficher();
+
+            f.Enfiler("Ari");
+            f.Afficher();
+
+            f.Enfiler("dernier");
+            f.Afficher();
             //int cpt = 0;
             //while(cpt<100)
             //{
