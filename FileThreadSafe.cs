@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace tp4
@@ -10,8 +11,7 @@ namespace tp4
     {
         //Grace à ces locks on s'assure qu'il n'y a  
         //pas d'écritures simultanées dans la file
-        private Object _lockEnf;
-        private Object _lockDef;
+        private Object _lock;
         //*****************************************
         //*****************************************
 
@@ -19,8 +19,7 @@ namespace tp4
         public FileThreadSafe(int taille)
         {
             tab = new T[taille]; Init();
-            _lockEnf = new Object();
-            _lockDef = new Object();
+            _lock= new Object();
         }
         private int Suivant(int i)
         {
@@ -30,24 +29,40 @@ namespace tp4
         private void Init() { tete = queue = -1; }
         public void Enfiler(T element)
         {
-            lock (_lockEnf)
-            { 
+            lock (_lock)
+            {
+                //Si la file est pleine on attend qu'un autre thread defile
                 if (Pleine())
-                    throw new ExceptionFilePleine();
+                { 
+                    //while (Pleine())
+                    //{
+                    //    Monitor.Wait(_lock);
+                    //}
+                }
                 else if (Vide())
                     tab[queue = tete = 0] = element;
                 else
                 {
                     tab[queue = Suivant(queue)] = element;
                 }
+                Monitor.Pulse(_lock);
             }
         }
 
         public void Defiler()
         {
-            lock (_lockDef)
+            lock (_lock)
             {
+                //Si la file est vide on attend qu'un autre thread enfile
+                if (Vide())
+                { 
+                    while (Vide())
+                    { 
+                        Monitor.Wait(_lock);
+                    }
+                }
                 tete = (tete + 1) % tab.Length;
+                Monitor.Pulse(_lock);
             }
         }
         public bool Vide()

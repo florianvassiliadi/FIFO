@@ -32,6 +32,10 @@ namespace tp4
             //Thread t2 = new Thread(() => retirer(f2, 2));
             //Thread t3 = new Thread(() => ajouter(f2, new List<string>(new string[] { "Michel", "Ari" })));
 
+            //t1.IsBackground = true;
+            //t2.IsBackground = true;
+            //t3.IsBackground = true;
+
             //t1.Start();
             //t2.Start();
             //t3.Start();
@@ -52,6 +56,10 @@ namespace tp4
             Thread t2 = new Thread(() => retirer(f3, 2));
             Thread t3 = new Thread(() => ajouter(f3, new List<string>(new string[] { "Michel", "Ari" })));
 
+            t1.IsBackground = true;
+            t2.IsBackground = true;
+            t3.IsBackground = true;
+
             t1.Start();
             t2.Start();
             t3.Start();
@@ -63,6 +71,7 @@ namespace tp4
             f3.Afficher();
             #endregion
 
+            Console.ReadLine();
         }
         public static void ajouter(FileThreadUnsafe<String> f,List<String> noms)
         {
