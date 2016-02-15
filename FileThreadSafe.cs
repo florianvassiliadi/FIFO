@@ -33,11 +33,11 @@ namespace tp4
             {
                 //Si la file est pleine on attend qu'un autre thread defile
                 if (Pleine())
-                { 
-                    //while (Pleine())
-                    //{
-                    //    Monitor.Wait(_lock);
-                    //}
+                {
+                    while (Pleine())
+                    {
+                        Monitor.Wait(_lock);
+                    }
                 }
                 else if (Vide())
                     tab[queue = tete = 0] = element;

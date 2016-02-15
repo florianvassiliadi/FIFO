@@ -14,14 +14,13 @@ namespace tp4
         {
             //-I
             #region
-            //FileThreadUnsafe<String> f = new tp4.FileThreadUnsafe<String>(4);
-            //ajouter(f, new List<string>(new string[] { "Florian", "Vincent", "Alex", "Math" }));
-            //f.Afficher();
+            FileThreadUnsafe<String> f = new tp4.FileThreadUnsafe<String>(4);
+            ajouter(f, new List<string>(new string[] { "Florian", "Vincent", "Alex", "Math" }));
 
-            //retirer(f, 2);
+            retirer(f, 2);
 
-            //ajouter(f, new List<string>(new string[] { "Michel", "Ari" }));
-            //f.Afficher();
+            ajouter(f, new List<string>(new string[] { "Michel", "Ari" }));
+            f.Afficher();
             #endregion
 
             //-II
@@ -50,25 +49,25 @@ namespace tp4
 
             //III/IV
             #region
-            FileThreadSafe<String> f3 = new tp4.FileThreadSafe<String>(4);
+            //FileThreadSafe<String> f3 = new tp4.FileThreadSafe<String>(4);
 
-            Thread t1 = new Thread(() => ajouter(f3, new List<string>(new string[] { "Florian", "Vincent", "Alex", "Math" })));
-            Thread t2 = new Thread(() => retirer(f3, 2));
-            Thread t3 = new Thread(() => ajouter(f3, new List<string>(new string[] { "Michel", "Ari" })));
+            //Thread t1 = new Thread(() => ajouter(f3, new List<string>(new string[] { "Florian", "Vincent", "Alex", "Math" })));
+            //Thread t2 = new Thread(() => retirer(f3, 2));
+            //Thread t3 = new Thread(() => ajouter(f3, new List<string>(new string[] { "Michel", "Ari" })));
 
-            t1.IsBackground = true;
-            t2.IsBackground = true;
-            t3.IsBackground = true;
+            //t1.IsBackground = true;
+            //t2.IsBackground = true;
+            //t3.IsBackground = true;
 
-            t1.Start();
-            t2.Start();
-            t3.Start();
+            //t1.Start();
+            //t2.Start();
+            //t3.Start();
 
-            t1.Join();
-            t2.Join();
-            t3.Join();
+            //t1.Join();
+            //t2.Join();
+            //t3.Join();
 
-            f3.Afficher();
+            //f3.Afficher();
             #endregion
 
             Console.ReadLine();
